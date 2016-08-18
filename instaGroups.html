@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="instaGroups">
+    <head lang="en">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>InstaGroups</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxmFFRPKU02TYMUvEwRp9hy0mydgQJod0"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+        <script src="./js/instaGroups.js"></script>
+        <link rel="stylesheet" href="./css/instaGroups.css">
+    </head>
+
+    <body ng-controller="instaGroupsController">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand header-font" href="#/">InstaGroups</a>
+                </div>
+                <p ng-show="accessToken != null" class="navbar-text navbar-right"> {{signedInMessage}} </p>
+            </div>
+        </nav>
+
+        <div class="jumbotron" ng-show="accessToken == null">
+            <div class="container">
+                <h2> {{welcomeMessageTitle}} </h2>
+                <p> {{welcomeMessageBody}} </p>
+                <button type="button" class="btn btn-success btn-lg" ng-click="signIn()">Sign in with Instagram</button>
+            </div>
+        </div>
+
+        <div ng-show="accessToken != null">
+            <ul class="nav nav-pills nav-font">
+                <li ng-class="{active: isActive('/home')}"><a href="#home">Home</a></li>
+                <li ng-class="{active: isActive('/groups')}"><a href="#groups">Groups</a></li>
+                <li ng-class="{active: isActive('/users')}"><a href="#users">Users</a></li>
+                <li ng-class="{active: isActive('/media')}"><a href="#media">Media</a></li>
+            </ul>
+
+            <div ng-view></div>  
+        </div>
+    </body>
+</html>
