@@ -1,0 +1,84 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2> {{title}} </h2>
+			<p> {{introMsg}} </p>
+			<div class="row">
+				<div class="col-md-12" id="media-dropdown">
+					<strong>Choose methods to search media: </strong>
+					<div class="btn-group"  uib-dropdown>
+				    	<button type="button" class="btn btn-primary single-button" uib-dropdown-toggle>
+				        	{{selectedItem}}
+				        	<span class="caret"></span>
+				    	</button>
+				    	<ul class="uib-dropdown-menu">
+				        	<li ng-repeat="item in items">
+				        		<a href="" ng-click="processSelection(item)"> {{item}} </a>
+				        	</li>
+				    	</ul>
+				    </div>
+
+				    <div class="input-group search-btn">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-success" ng-click="searchMedia()">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								Go!
+							</button>
+						</span>
+						<input type="text" class="form-control" ng-disabled="disableSearchInput()" ng-model="search.requestInput" placeholder="{{getInputPlaceHolder()}}">
+					</div>
+					<span ng-show="selectedItem === items[2] && invlaidTagName" class="text-danger margin-top-5px">
+						Empty name is not valid
+					</span>
+
+					<span ng-show="selectedItem === items[3] && invlaidLocation" class="text-danger margin-top-5px">
+						Empty location string is not valid
+					</span>
+					<span ng-show="selectedItem === items[3] && search.showSuccessfulGeoInfo" class="text-success margin-top-5px">
+						Address: {{search.geoLocation.formattedAddress}}, 
+						latitude: {{search.geoLocation.lat}}, 
+						longitude: {{search.geoLocation.lng}}
+					</span>
+					<span ng-show="selectedItem === items[3] && search.showFailedGeoInfo" class="text-danger margin-top-5px">
+						Geocode was not successful for the following reason: {{search.geoStatus}}
+					</span>
+
+					<div ng-show="selectedItem === items[3]" id="datePicker">
+						<p> Optional time parameters, click the calendar button to select start date and end date: </p>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" ng-click="startDatePickerOpen($event)">
+									<i class="glyphicon glyphicon-calendar"></i>
+									Start date
+								</button>
+							</span>
+							<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="startDatePickerOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="(Optional) click left button to select"/>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" ng-click="endDatePickerOpen($event)">
+									<i class="glyphicon glyphicon-calendar"></i>
+									&nbsp End date
+								</button>
+							</span>
+							<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="endDatePickerOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="(Optional) click left button to select"/>
+						</div>
+						<p ng-show="selectedItem === items[3] && search.showInvalidDatesInfo" class="text-danger margin-top-5px" id="invalid-dates-info">
+							Start date should be before end date.
+						</p>
+					</div>
+				        
+				    </div>
+			    </div>
+			</div>
+
+			<p ng-show="search.resultMedia.length === 0"> No results found. </p>
+		    <ul>
+		    	<li ng-repeat="media in search.resultMedia" id="media-result">
+		        	<media-info media="media"></media-info>
+		        </li>
+		    </ul>
+		</div>
+	</div>
+</div>

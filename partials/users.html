@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2> {{title}} </h2>
+			<p> {{introMsg}} </p>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-success" ng-click="searchUsers()">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								Search
+							</button>
+						</span>
+						<input type="text" class="form-control" ng-model="search.requestUserName" placeholder="user name">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<p ng-show="invlaidUserName" class="text-danger margin-top-5px">
+						Empty name is not valid
+					</p>
+				</div>
+			</div>
+
+		    <ul>
+		    	<li ng-repeat="user in search.resultUsers" id="users-result">
+		        	<user-info user="user"></user-info>
+		        </li>
+		    </ul>
+		</div>
+	</div>
+</div>

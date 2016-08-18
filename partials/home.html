@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-2" id="user-profile">
+			<img ng-src="{{loggedinUser().profile_picture}}"/>
+			<a href="https://www.instagram.com/{{loggedinUser().username}}" target="_blank"> {{loggedinUser().username}} </a>
+		</div>
+		<div class="col-md-6">
+			<h2> {{welcomeMessageTitle}} </h2>
+			<p> {{welcomeMessageBody}} </p>
+			<span>
+				<a class="btn  btn-info" href="#groups"> Try Groups » </a>
+				<a class="btn  btn-info" href="#users"> Try Users » </a>
+				<a class="btn  btn-info" href="#media"> Try Media » </a>
+			</span>
+		</div>
+	</div>
+</div>

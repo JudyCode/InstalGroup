@@ -1,0 +1,64 @@
+<div id="media-info">
+	<img src="{{media.images.standard_resolution.url}}"/>
+	<article>
+		<div id="media-title">
+			<h4>
+				Posted by
+				<a href="https://www.instagram.com/{{media.user.username}}" target="_blank"> {{media.user.username}}</a>
+			</h4>
+			<p> @ {{media.created_time * 1000 | date:'medium'}} </p>
+		</div>
+	
+		<div id="media-details">
+			<p>
+				<a href="{{media.link}}" target="_blank"> Media link in Instagram </a>
+			</p>
+			<p>
+				<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				<strong> {{media.likes.count}} likes </strong>
+			</p>
+			<p>
+				<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> tag(s):
+					<span ng-show="getTagList().length == 0"> 0 tag</span>
+					<span ng-repeat="tag in getTagList()">
+						<u>{{tag}}</u> &nbsp
+					</span>
+					<span ng-show="hasMoreTags"> (more...) </span>
+				<span>
+			</p>
+			<p ng-show="media.location != null">
+				<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+					location:
+					{{media.location.name}}
+				<span>
+			</p>
+			<p>
+				<strong> Caption: </strong>
+				<span ng-show="media.caption == null"> (none) </span>
+				<span ng-show="media.caption != null"> {{media.caption.text}} </span>
+			</p>
+		</div>
+
+		<button type="button" class="btn btn-default btn-sm" ng-hide="showAddToGroupSection" ng-click="setAddToGroupSection()">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			Add user to Group
+		</button>
+		<div ng-show="showAddToGroupSection" id="add-user-to-group-section">
+			<input type="text" ng-model="groupNameToAddUser" placeholder="group name">
+			<button type="button" class="btn btn-link btn-sm" ng-click="addUserToGroup()">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				Add
+			</button>
+			<button type="button" class="btn btn-link btn-sm" ng-click="cancelAddUserToGroup()">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				Cancel
+			</button>
+			<p class="text-danger" ng-show="showEmptyNameError">
+				Empty name is not valid
+			</p>
+			<p class="text-success" ng-show="showSuccessfulMessage">
+				Added, view <a href="#groups">Groups</a>
+			</p>
+		</div>
+	</article>
+</div>

@@ -1,0 +1,38 @@
+<div id="user-info">
+	<img ng-src="{{user.profile_picture}}"/>
+	<article>
+		<h2>
+			<a href="https://www.instagram.com/{{user.username}}" target="_blank"> {{user.username}} </a>
+		</h2>
+	</article>
+	<button type="button" class="btn btn-default btn-sm" ng-click="setAddToGroupSection()">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		Add to Group
+	</button>
+	<button type="button" class="btn btn-default btn-sm" ng-click="viewRecentMedia()">
+		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+		View recent media
+	</button>
+
+	<div ng-show="showAddToGroupSection" id="add-user-to-group-section">
+		<div class="input-group">
+			<input type="text" class="form-control" ng-model="groupNameToAddUser" placeholder="group name">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-link" ng-click="addUserToGroup()">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					Add
+				</button>
+				<button type="button" class="btn btn-link" ng-click="cancelAddUserToGroup()">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					Cancel
+				</button>
+			</span>
+		</div>
+		<p class="text-danger margin-top-5px" ng-show="showEmptyNameError">
+			Empty group name is not valid.
+		</p>
+		<p class="text-success margin-top-5px" ng-show="showSuccessfulMessage">
+			User is added successfully, view <a href="#groups">Groups</a>.
+		</p>
+	</div>
+</div>
